@@ -1,20 +1,22 @@
 package vn.edu.iuh.hero.backend.models;
 
 import com.neovisionaries.i18n.CountryCode;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "address")
 public class Address {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "street", length = 150)
@@ -39,8 +41,5 @@ public class Address {
         this.country = country;
         this.number = number;
         this.zipcode = zipcode;
-    }
-
-    public Address() {
     }
 }

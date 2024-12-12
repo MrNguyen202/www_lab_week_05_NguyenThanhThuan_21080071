@@ -1,13 +1,17 @@
 package vn.edu.iuh.hero.backend.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import vn.edu.iuh.hero.backend.enums.SkillLevel;
 import vn.edu.iuh.hero.backend.ids.JobSkillId;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "job_skill")
 public class JobSkill {
@@ -30,5 +34,4 @@ public class JobSkill {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "skill_level", nullable = false)
     private SkillLevel skillLevel;
-
 }

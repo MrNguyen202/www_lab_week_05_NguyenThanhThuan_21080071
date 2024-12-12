@@ -36,45 +36,45 @@
             padding: 10px 0;
             flex-shrink: 0; /* Không cho footer co lại */
         }
+
+        .hero-section .container {
+            text-align: center;
+        }
+
+        .hero-section form {
+            margin: 0 auto; /* Canh giữa form */
+            width: 50%; /* Chiều rộng của form tìm kiếm */
+        }
+
         /* Tùy chỉnh màu sắc */
         .navbar {
             background-color: #007bff; /* Xanh đậm */
         }
+
         .navbar-brand, .nav-link {
             color: #fff !important;
         }
+
         .navbar-brand:hover, .nav-link:hover {
             color: #f8f9fa !important; /* Màu trắng nhạt khi hover */
         }
+
         .hero-section {
             background-color: #f8f9fa; /* Nền xám nhạt */
             padding: 40px 0;
             text-align: center;
         }
+
         .hero-section h1 {
             color: #343a40; /* Màu chữ đậm */
         }
+
         .hero-section p {
             color: #6c757d; /* Màu chữ xám */
         }
+
         .navbar-nav .nav-item {
             margin-right: 50px; /* Tùy chỉnh khoảng cách */
-        }
-        .editable {
-            padding: 5px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            white-space: nowrap; /* Không xuống dòng */
-            overflow: hidden; /* Ẩn nội dung tràn */
-            text-overflow: ellipsis; /* Hiển thị dấu ba chấm nếu tràn */
-        }
-
-        .editable:focus {
-            outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-            overflow: auto; /* Cho phép cuộn khi chỉnh sửa */
-            text-overflow: initial; /* Hiển thị đầy đủ nội dung */
-            white-space: nowrap; /* Không xuống dòng */
         }
     </style>
 </head>
@@ -84,7 +84,8 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Tuyển dụng</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -93,7 +94,7 @@
                         <a class="nav-link active" aria-current="page" href="/home">Home Page</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="/viewSearch">Search Page</a>
+                        <a class="nav-link" href="/search">Search Page</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Login / Sign up</a>
@@ -106,13 +107,21 @@
 
 <main>
     <!-- Hero Section -->
-    <section class="hero-section mt-3">
+    <section class="hero-section center">
         <div class="container">
-            <h1>Chào mừng đến với Tuyển dụng việc làm!</h1>
-            <p>Kết nối nhà tuyển dụng và ứng viên dễ dàng hơn bao giờ hết.</p>
+            <h1>Tìm kiếm việc làm</h1>
+            <p>Chúng tôi cung cấp hàng ngàn công việc từ các công ty uy tín trên toàn quốc</p>
+        </div>
+        <div>
+            <form action="/search" method="get">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Nhập từ khóa" name="keyword">
+                    <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                </div>
+            </form>
         </div>
 
-        <h2 style="text-align: start" class="mb-3">List job</h2>
+        <!-- Hiển thị danh sách công việc -->
         <table class="table" style="table-layout: fixed;">
             <thead class="table-dark">
             <tr>
@@ -126,44 +135,45 @@
             <tbody>
             <!-- Loop through each job in the map -->
             <tr th:each="entry : ${jobs}">
-                <td class="editable" style="width: 20%;" th:text="${entry.getJobName()}"></td>
-                <td class="editable" style="width: 30%;" th:text="${entry.getJobDesc()}"></td>
-                <td class="editable" style="width: 25%;" th:text="${entry.getCompanyName()}"></td>
-                <td class="editable" style="width: 15%;">
+                <td th:text="${entry.getJobName()}"></td>
+                <td th:text="${entry.getJobDesc()}"></td>
+                <td th:text="${entry.getCompanyName()}"></td>
+                <td>
                     <!-- Loop through each skill in the skills list -->
                     <span th:each="skill : ${entry.skills}" th:text="${skill} + ', '"></span>
                 </td>
-                <td class="editable" style="width: 10%;">
+                <td style="text-align: end">
                     <a class="btn btn-primary" th:href="@{'/login'}">Apply Now</a>
                 </td>
             </tr>
             </tbody>
         </table>
         <!-- Pagination -->
-        <div style="display: flex; align-items: center; justify-content: center" th:if="${totalElements > pageSize}">
+        <div th:if="${totalElements > pageSize}">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <!-- Previous button -->
-                    <li th:class="${currentPage > 0} ? 'page-item' : 'page-item disabled d-none'">
+                    <li th:class="${currentPage > 0} ? 'page-item' : 'page-item disabled'">
                         <a class="page-link" th:href="@{'/home?page=' + ${currentPage - 1} + '&size=' + ${pageSize}}"
                            th:text="'Previous'"></a>
                     </li>
 
-                    <!-- Loop through page numbers (e.g., 1, 2, 3, ..., 20) -->
-                    <li th:each="i : ${#numbers.sequence(pageStart, pageEnd)}"
+                    <!-- Loop through the page numbers to show a maximum of 3 pages (example: 1, 2, 3) -->
+                    <li th:each="i : ${#numbers.sequence(0, 2)}"
                         th:class="${currentPage == i} ? 'page-item active' : 'page-item'">
                         <a class="page-link" th:href="@{'/home?page=' + ${i} + '&size=' + ${pageSize}}"
                            th:text="${i + 1}"></a>
                     </li>
 
                     <!-- Next button -->
-                    <li th:class="${currentPage < totalPages - 1} ? 'page-item' : 'page-item disabled d-none'">
+                    <li th:class="${currentPage < totalPages - 1} ? 'page-item' : 'page-item disabled'">
                         <a class="page-link" th:href="@{'/home?page=' + ${currentPage + 1} + '&size=' + ${pageSize}}"
                            th:text="'Next'"></a>
                     </li>
                 </ul>
             </nav>
         </div>
+
     </section>
 </main>
 

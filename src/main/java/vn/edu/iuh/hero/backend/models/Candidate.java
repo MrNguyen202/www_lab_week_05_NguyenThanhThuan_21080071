@@ -2,51 +2,58 @@ package vn.edu.iuh.hero.backend.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import vn.edu.iuh.hero.backend.enums.CandidateRole;
+import lombok.ToString;
+import vn.edu.iuh.hero.backend.enums.Role;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "candidate")
-public class Candidate {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Column(name = "dob", nullable = false)
+public class Candidate extends User {
+    @Column(name = "dob", nullable = true)
     private LocalDate dob;
 
-    @Column(name = "email", nullable = false)
-    private String email;
+    @Column(name = "email_address", nullable = true)
+    private String emailAddress;
 
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(name = "phone", nullable = false, length = 15)
+    @Column(name = "phone", nullable = true, length = 15)
     private String phone;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "role", nullable = false)
-    private CandidateRole role;
+    private String avatar;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "address", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = true) // Cho phép null
+    @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = true)
     private Address address;
 
-    public Candidate(Long id, LocalDate dob, String email, String fullName, String phone, Address address) {
-        this.id = id;
+    public Candidate(Long id, String email, String password, Role role, LocalDate dob, String emailAddress, String fullName, String phone, Address address) {
+        super(id, email, password, role);
         this.dob = dob;
-        this.email = email;
+        this.emailAddress = emailAddress;
         this.fullName = fullName;
         this.phone = phone;
         this.address = address;
     }
 
-    public Candidate() {
+    @Override
+    public String toString() {
+        return "Candidate{" +
+                "dob=" + dob +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", address=" + address +
+                ", id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

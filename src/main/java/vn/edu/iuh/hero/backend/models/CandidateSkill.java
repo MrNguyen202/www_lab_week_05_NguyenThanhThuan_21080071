@@ -1,14 +1,14 @@
 package vn.edu.iuh.hero.backend.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import vn.edu.iuh.hero.backend.enums.SkillLevel;
 import vn.edu.iuh.hero.backend.ids.CandidateSkillId;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "candidate_skill")
 public class CandidateSkill {

@@ -3,6 +3,7 @@ package vn.edu.iuh.hero.backend.ids;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
 
@@ -11,6 +12,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Embeddable
 public class CandidateSkillId implements Serializable {
     private static final long serialVersionUID = 8150614134128675711L;

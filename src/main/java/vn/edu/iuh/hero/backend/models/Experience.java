@@ -20,7 +20,8 @@ import java.time.LocalDate;
 @Table(name = "experience")
 public class Experience {
     @Id
-    @Column(name = "exp_id") @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "exp_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "to_date", nullable = false)
     private LocalDate toDate;
