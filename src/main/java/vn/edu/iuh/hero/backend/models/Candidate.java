@@ -8,6 +8,7 @@ import lombok.ToString;
 import vn.edu.iuh.hero.backend.enums.Role;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,6 +33,9 @@ public class Candidate extends User {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = true) // Cho phép null
     @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = true)
     private Address address;
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Experience> experiences;
 
     public Candidate(Long id, String email, String password, Role role, LocalDate dob, String emailAddress, String fullName, String phone, Address address) {
         super(id, email, password, role);

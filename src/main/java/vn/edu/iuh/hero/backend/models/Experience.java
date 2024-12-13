@@ -14,8 +14,15 @@ package vn.edu.iuh.hero.backend.models;
  */
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "experience")
 public class Experience {

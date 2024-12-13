@@ -22,6 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.iuh.hero.backend.dtos.CandidateTopLevelDTO;
 import vn.edu.iuh.hero.backend.dtos.JobIndexDTO;
 import vn.edu.iuh.hero.backend.enums.Role;
 import vn.edu.iuh.hero.backend.models.Candidate;
@@ -123,7 +124,7 @@ public class AuthenticateController {
         ModelAndView modelAndView = new ModelAndView();
         if (userService.findByEmail(email).isPresent()) {
             User user = userService.findByEmail(email).get();
-            System.out.println(user);
+//            System.out.println(user);
             if (user.getPassword().equals(password)) {
                 modelAndView.addObject("message", "Login successfully!");
 
@@ -139,6 +140,19 @@ public class AuthenticateController {
 
                 // Điều hướng tới trang dashboard phù hợp
                 if (user.getRole().equals(Role.COMPANY)) {
+                    Page<CandidateTopLevelDTO> candidates = candidateService.getAllTopLevel(0, 20);
+
+                    // Calculate start and end page numbers
+                    int pageStart = (0 / 20) * 20;
+                    int pageEnd = Math.min(pageStart + 19, candidates.getTotalPages() - 1);
+
+                    modelAndView.addObject("cans", candidates.getContent());
+                    modelAndView.addObject("totalPages", candidates.getTotalPages());
+                    modelAndView.addObject("totalElements", candidates.getTotalElements());
+                    modelAndView.addObject("currentPage", candidates.getNumber());
+                    modelAndView.addObject("pageSize", candidates.getSize());
+                    modelAndView.addObject("pageStart", pageStart);
+                    modelAndView.addObject("pageEnd", pageEnd);
                     modelAndView.setViewName("companies/dashboardCompany");
                 } else {
                     Candidate candidate = (Candidate) session.getAttribute("user");

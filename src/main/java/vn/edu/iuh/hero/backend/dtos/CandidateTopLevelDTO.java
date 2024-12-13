@@ -13,10 +13,28 @@ package vn.edu.iuh.hero.backend.dtos;
  *
  */
 
+import lombok.*;
+import vn.edu.iuh.hero.backend.models.Candidate;
+
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class CandidateTopLevelDTO {
     private Long id;
     private String fullName;
-    private String email;
-    private String phone;
-    private String address;
+    private String level;
+    private List<String> companies;
+    private List<String> skills;
+
+    public CandidateTopLevelDTO(Candidate candidate, String level, List<String> companies, List<String> skills) {
+        this.id = candidate.getId();
+        this.fullName = candidate.getFullName();
+        this.level = level;
+        this.companies = companies;
+        this.skills = skills;
+    }
 }
