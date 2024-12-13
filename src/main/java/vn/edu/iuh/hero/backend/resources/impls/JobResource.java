@@ -88,5 +88,4 @@ public class JobResource implements IResources<Job, Long> {
                 jobs
         ));
     }
-
 }

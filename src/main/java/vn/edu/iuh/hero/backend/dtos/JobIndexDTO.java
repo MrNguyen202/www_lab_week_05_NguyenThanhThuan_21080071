@@ -25,7 +25,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 public class JobIndexDTO {
     private Long id;

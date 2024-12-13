@@ -13,6 +13,20 @@ package vn.edu.iuh.hero.backend.enums;
  *
  */
 
+import lombok.Getter;
+
+@Getter
 public enum SkillLevel {
-    MASTER, BEGINNER, ADVANCED, IMTERMEDIATE, PROFESSIONAL
+    MASTER("Master"),
+    BEGINNER("Beginner"),
+    ADVANCED("Advanced"),
+    INTERMEDIATE("Intermediate"),
+    PROFESSIONAL("Professional");
+
+    private final String displayName;
+
+    SkillLevel(String displayName) {
+        this.displayName = displayName;
+    }
+
 }

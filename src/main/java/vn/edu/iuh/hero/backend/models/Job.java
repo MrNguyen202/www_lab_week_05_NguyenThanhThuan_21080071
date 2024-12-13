@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,13 +29,18 @@ public class Job {
     @Column(name = "job_name", nullable = false)
     private String jobName;
 
+    @Column(name = "expired_date", nullable = false)
+    private LocalDate expiredDate;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company")
+    @ToString.Exclude
     private Company company;
 
-    public Job(Long id, String jobDesc, String jobName) {
+    public Job(Long id, String jobDesc, String jobName, LocalDate expiredDate) {
         this.id = id;
         this.jobDesc = jobDesc;
         this.jobName = jobName;
+        this.expiredDate = expiredDate;
     }
 }

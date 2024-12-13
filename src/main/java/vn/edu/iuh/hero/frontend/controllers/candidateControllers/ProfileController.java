@@ -91,7 +91,7 @@ public class ProfileController {
         candidate.setEmailAddress(email);
         candidate.setPhone(phone);
         candidate.setDob(dob);
-        System.out.println(address);
+
         candidate.getAddress().setStreet(address.split(", ")[1]);
         candidate.getAddress().setCity(address.split(", ")[2]);
         candidate.getAddress().setCountry(CountryCode.valueOf(address.split(", ")[3]));

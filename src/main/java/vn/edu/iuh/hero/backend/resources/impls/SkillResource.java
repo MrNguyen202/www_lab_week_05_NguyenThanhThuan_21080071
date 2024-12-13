@@ -15,6 +15,7 @@ package vn.edu.iuh.hero.backend.resources.impls;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vn.edu.iuh.hero.backend.models.Response;
@@ -29,9 +30,14 @@ public class SkillResource implements IResources<Skill, Long> {
     @Autowired
     private SkillService skillService;
 
+    @PostMapping("/insert")
     @Override
     public ResponseEntity<Response> add(Skill skill) {
-        return null;
+        return ResponseEntity.ok(new Response(
+                200,
+                "Add skill successfully",
+                skillService.add(skill)
+        ));
     }
 
     @Override

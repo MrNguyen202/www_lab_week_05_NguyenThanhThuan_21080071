@@ -20,9 +20,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.iuh.hero.backend.dtos.CandidateTopLevelDTO;
+import vn.edu.iuh.hero.backend.enums.SkillLevel;
+import vn.edu.iuh.hero.backend.enums.SkillType;
 import vn.edu.iuh.hero.backend.services.impls.CandidateService;
+import vn.edu.iuh.hero.backend.services.impls.SkillService;
+
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/company")
@@ -31,9 +37,22 @@ public class CompanyController {
     @Autowired
     private CandidateService candidateService;
 
+    @Autowired
+    private SkillService skillService;
+
     @RequestMapping("/viewProfile")
     public String viewProfile() {
         return "companies/company-profile";
+    }
+
+    @GetMapping("/viewPostJob")
+    public ModelAndView viewPostJob() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("skills", skillService.findAll());
+        modelAndView.addObject("typeSkill", Arrays.asList(SkillType.values()));
+        modelAndView.addObject("skillLevels", Arrays.asList(SkillLevel.values()));
+        modelAndView.setViewName("companies/post-job");
+        return modelAndView;
     }
 
     @GetMapping("/viewHomeCompany")
