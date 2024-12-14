@@ -76,6 +76,7 @@ public class NguyenThanhThuan21080071Lab5Application {
 //                candidate.setEmailAddress(faker.internet().emailAddress());
 //                candidate.setPhone(faker.phoneNumber().cellPhone());
 //                candidate.setAvatar(faker.avatar().image());
+//                candidate.setCv("https://res.cloudinary.com/dlf3hmpnl/image/upload/v1734185725/yzwnjtuw2bulv5swtfgq.pdf");
 //
 //                candidate.setAddress(address);
 //                candidateService.add(candidate);
@@ -96,8 +97,8 @@ public class NguyenThanhThuan21080071Lab5Application {
 //                address.setCountry(CountryCode.valueOf(faker.address().countryCode()));
 //                address.setNumber(faker.address().streetAddressNumber());
 //                address.setZipcode(faker.address().zipCode());
-
-    /// /                addressService.add(address);
+//
+//    //                addressService.add(address);
 //
 //                Company company = new Company();
 //                company.setEmail(faker.internet().emailAddress());
@@ -117,6 +118,7 @@ public class NguyenThanhThuan21080071Lab5Application {
 //                    job.setJobName(faker.job().title());
 //                    job.setJobDesc(faker.lorem().paragraph(1));
 //                    job.setCompany(company);
+//                    job.setExpiredDate(LocalDate.now().plusDays(rnd.nextInt(30) + 1));
 //                    jobService.add(job);
 //                }
 //            }

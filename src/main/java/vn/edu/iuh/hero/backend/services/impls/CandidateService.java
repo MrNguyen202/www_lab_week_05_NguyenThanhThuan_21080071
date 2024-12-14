@@ -19,6 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import vn.edu.iuh.hero.backend.dtos.CandidateForJobDTO;
 import vn.edu.iuh.hero.backend.dtos.CandidateTopLevelDTO;
 import vn.edu.iuh.hero.backend.models.Candidate;
 import vn.edu.iuh.hero.backend.models.Experience;
@@ -101,6 +102,18 @@ public class CandidateService implements IServices<Candidate, Long> {
         if (totalExperience < 2) return "Junior";
         if (totalExperience < 5) return "Mid-level";
         return "Senior";
+    }
+
+
+    public Page<CandidateForJobDTO> findCandidatesByJobId(Long jobId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+       Page<Object[]> candidates = candidateRepository.findCandidatesByJobId(jobId, pageable);
+
+        return candidates.map(row -> {
+            Candidate candidate = (Candidate) row[0];
+            Long totalMatchedSkills = ((Number) row[1]).longValue();
+            return new CandidateForJobDTO(candidate, totalMatchedSkills);
+        });
     }
 
 }

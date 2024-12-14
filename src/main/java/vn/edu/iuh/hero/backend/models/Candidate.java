@@ -28,7 +28,11 @@ public class Candidate extends User {
     @Column(name = "phone", nullable = true, length = 15)
     private String phone;
 
+    @Column(name = "avatar", nullable = true)
     private String avatar;
+
+    @Column(name = "cv", nullable = true)
+    private String cv;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = true) // Cho phép null
     @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = true)

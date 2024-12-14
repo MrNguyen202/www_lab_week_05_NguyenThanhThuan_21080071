@@ -19,7 +19,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import vn.edu.iuh.hero.backend.dtos.JobCompanyDTO;
 import vn.edu.iuh.hero.backend.dtos.JobIndexDTO;
+import vn.edu.iuh.hero.backend.models.Candidate;
 import vn.edu.iuh.hero.backend.models.Job;
 import vn.edu.iuh.hero.backend.models.JobSkill;
 import vn.edu.iuh.hero.backend.repositories.JobRepository;
@@ -84,6 +86,16 @@ public class JobService implements IServices<Job, Long> {
         return jobs.map(job -> {
             List<String> skills = jobSkillRepository.findSkillsByJobId(job.getId());
             return new JobIndexDTO(job, skills);
+        });
+    }
+
+    public Page<JobCompanyDTO> getJobsByCompany(Long companyId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+        Page<Job> jobs = jobRepository.findAllByCompany_Id(companyId, pageable);
+
+        return jobs.map(job -> {
+            List<JobSkill> jobSkills = jobSkillRepository.findAllByJob_Id(job.getId());
+            return new JobCompanyDTO(job, jobSkills);
         });
     }
 }

@@ -18,4 +18,16 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
                 ORDER BY totalExperience DESC
             """)
     Page<Object[]> findTopCandidatesByExperience(Pageable pageable);
+    //Lấy danh sách ứng viên phù hợp với skill của công việc
+    @Query("""
+                SELECT c, COUNT(DISTINCT s.skillName) AS totalMatchedSkills
+                FROM Candidate c
+                JOIN CandidateSkill cs ON c.id = cs.can.id
+                JOIN JobSkill js ON cs.skill.id = js.skill.id
+                JOIN Skill s ON js.skill.id = s.id
+                WHERE js.job.id = :jobId
+                GROUP BY c.id
+                ORDER BY totalMatchedSkills DESC
+            """)
+    Page<Object[]> findCandidatesByJobId(Long jobId, Pageable pageable);
 }

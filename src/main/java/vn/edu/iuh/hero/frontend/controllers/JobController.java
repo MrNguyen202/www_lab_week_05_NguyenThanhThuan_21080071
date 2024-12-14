@@ -76,6 +76,8 @@ public class JobController {
             jobSkill.setJob(job);
             jobSkill.setSkill(skillService.findById(skillId).get());
             jobSkill.setSkillLevel(SkillLevel.valueOf(jobInsertDTO.getSkillLevel().get(skillId)));
+            System.out.println(jobInsertDTO.getMoreInfo());
+            jobSkill.setMoreInfos(jobInsertDTO.getMoreInfo());
             jobSkillService.add(jobSkill);
         }
         modelAndView.addObject("message", "Job posted successfully!");

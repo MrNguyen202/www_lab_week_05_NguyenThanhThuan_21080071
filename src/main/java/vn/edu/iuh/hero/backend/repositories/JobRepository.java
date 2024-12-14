@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import vn.edu.iuh.hero.backend.models.Company;
 import vn.edu.iuh.hero.backend.models.Job;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface JobRepository extends JpaRepository<Job, Long> {
             "JOIN CandidateSkill cs ON cs.id.skillId = js.id.skillId " +
             "WHERE cs.id.canId = :candidateId")
     Page<Job> findJobsByCandidateId(@Param("candidateId") Long candidateId, Pageable pageable);
+
+    Page<Job> findAllByCompany_Id(Long companyId, Pageable pageable);
 }

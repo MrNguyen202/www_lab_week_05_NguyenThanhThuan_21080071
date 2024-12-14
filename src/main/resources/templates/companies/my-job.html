@@ -37,6 +37,7 @@
             padding: 10px 0;
             flex-shrink: 0; /* Không cho footer co lại */
         }
+
         /* Tùy chỉnh màu sắc */
         .navbar {
             background-color: #007bff; /* Xanh đậm */
@@ -67,6 +68,7 @@
         .navbar-nav .nav-item {
             margin-right: 50px; /* Tùy chỉnh khoảng cách */
         }
+
         .editable {
             padding: 5px;
             border: 1px solid #ced4da;
@@ -98,18 +100,21 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-3">
-                        <a class="nav-link active" aria-current="page" href="/candidate/viewHomeCandidate">Home Page</a>
+                        <a class="nav-link active" aria-current="page" href="/company/viewHomeCompany">Home Page</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="/searchJob">Search Job</a>
+                        <a class="nav-link" href="/searchCV">Search CV</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="/cv">CV</a>
+                        <a class="nav-link" href="/myJop">My Job</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="/company/viewPostJob">Post Job</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/candidate/viewProfile">
+                        <a class="nav-link" href="/company/viewProfile">
                             <i class="fas fa-user"></i> <!-- Biểu tượng người dùng -->
-                            <span th:text="${session.user.getFullName()}"></span>
+                            <span th:text="${session.user.getCompName()}"></span>
                         </a>
                     </li>
                 </ul>
@@ -120,35 +125,53 @@
 
 <main>
     <!-- Hero Section -->
-    <section class="hero-section mt-3">
-        <div class="container">
-            <h1>Chào mừng đến với Tuyển dụng việc làm!</h1>
-            <p>Kết nối nhà tuyển dụng và ứng viên dễ dàng hơn bao giờ hết.</p>
+    <section class="hero-section">
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: row;">
+            <div style="margin-right: 20px; width: 50%">
+                <form action="/search" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Nhập từ khóa" name="keyword">
+                        <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <a href="/company/viewPostJob" class="btn btn-primary w-10">Post job</a>
+            </div>
         </div>
 
-        <h2 style="text-align: start" class="mb-3">Danh sách công việc phù hợp dành cho bạn</h2>
+        <!--    Danh sach job-->
+        <h2 style="text-align: start" class="my-3">Danh sách công việc</h2>
         <table class="table" style="table-layout: fixed;">
             <thead class="table-dark">
             <tr>
                 <th style="width: 20%;">Name job</th>
                 <th style="width: 30%;">Description</th>
-                <th style="width: 25%;">Company</th>
-                <th style="width: 15%;">Skill</th>
+                <th style="width: 20%;">Skill</th>
+                <th style="width: 10%;">Expired date</th>
+                <th style="width: 5%;"></th>
                 <th style="width: 10%;"></th>
+                <th style="width: 5%;"></th>
             </tr>
             </thead>
             <tbody>
             <!-- Loop through each job in the map -->
             <tr th:each="entry : ${jobs}">
-                <td class="editable" style="width: 20%;" th:text="${entry.getJobName()}"></td>
-                <td class="editable" style="width: 30%;" th:text="${entry.getJobDesc()}"></td>
-                <td class="editable" style="width: 25%;" th:text="${entry.getCompanyName()}"></td>
-                <td class="editable" style="width: 15%;">
+                <td class="editable" style="width: 20%;" th:text="${entry.getJob().getJobName()}"></td>
+                <td class="editable" style="width: 30%;" th:text="${entry.getJob().getJobDesc()}"></td>
+                <td class="editable" style="width: 20%;">
                     <!-- Loop through each skill in the skills list -->
-                    <span th:each="skill : ${entry.skills}" th:text="${skill} + ', '"></span>
+                    <span th:each="skill : ${entry.getJobSkills()}" th:text="${skill.getSkill().getSkillName()} + ', '"></span>
+                </td>
+                <td class="editable" style="width: 10%;" th:text="${entry.getJob().getExpiredDate()}"></td>
+                <td class="editable" style="width: 5%; text-align: center">
+                    <a class="btn btn-primary" th:href="@{'/viewJob'}">View</a>
                 </td>
                 <td class="editable" style="width: 10%; text-align: center">
-                    <a class="btn btn-primary" th:href="@{'/login'}">Apply Now</a>
+                    <a class="btn btn-warning" th:href="@{'/company/findCandidates/' + ${entry.getJob().getId()}}">Tìm ứng viên</a>
+                </td>
+                <td class="editable" style="width: 5%; text-align: center">
+                    <a class="btn btn-danger" th:href="@{'/delete'}">Delete</a>
                 </td>
             </tr>
             </tbody>
@@ -159,20 +182,20 @@
                 <ul class="pagination">
                     <!-- Previous button -->
                     <li th:class="${currentPage > 0} ? 'page-item' : 'page-item disabled d-none'">
-                        <a class="page-link" th:href="@{'/candidate/viewHomeCandidate?page=' + ${currentPage - 1} + '&size=' + ${pageSize}}"
+                        <a class="page-link" th:href="@{'/company/viewMyJob?page=' + ${currentPage - 1} + '&size=' + ${pageSize}}"
                            th:text="'Previous'"></a>
                     </li>
 
                     <!-- Loop through page numbers (e.g., 1, 2, 3, ..., 20) -->
                     <li th:each="i : ${#numbers.sequence(pageStart, pageEnd)}"
                         th:class="${currentPage == i} ? 'page-item active' : 'page-item'">
-                        <a class="page-link" th:href="@{'/candidate/viewHomeCandidate?page=' + ${i} + '&size=' + ${pageSize}}"
+                        <a class="page-link" th:href="@{'/company/viewMyJob?page=' + ${i} + '&size=' + ${pageSize}}"
                            th:text="${i + 1}"></a>
                     </li>
 
                     <!-- Next button -->
                     <li th:class="${currentPage < totalPages - 1} ? 'page-item' : 'page-item disabled d-none'">
-                        <a class="page-link" th:href="@{'/candidate/viewHomeCandidate?page=' + ${currentPage + 1} + '&size=' + ${pageSize}}"
+                        <a class="page-link" th:href="@{'/company/viewMyJob?page=' + ${currentPage + 1} + '&size=' + ${pageSize}}"
                            th:text="'Next'"></a>
                     </li>
                 </ul>
@@ -188,5 +211,6 @@
 
 <!-- Link to Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

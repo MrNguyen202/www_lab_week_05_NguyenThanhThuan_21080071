@@ -29,4 +29,5 @@ public class JobInsertDTO {
     private List<Long> skillSelected;  // Sửa kiểu List<Long> cho kỹ năng
     private Map<Long, String> skillLevel;  // Map giữa skill ID và level
     private String expiryDate;
+    private String moreInfo;
 }
