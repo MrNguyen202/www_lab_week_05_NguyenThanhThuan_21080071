@@ -97,10 +97,10 @@
                         <a class="nav-link active" aria-current="page" href="/candidate/viewHomeCandidate">Home Page</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="/search">Search Page</a>
+                        <a class="nav-link" href="/candidate/viewSearch">Search Page</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="/cv">CV</a>
+                        <a class="nav-link" href="/candidate/viewCV">CV</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/auth/logout">Log Out</a>
@@ -131,29 +131,29 @@
                             <tbody>
                             <tr>
                                 <td><strong>Full Name:</strong></td>
-                                <td><input type="text" class="editable" th:value="${session.user.getFullName()}"
+                                <td><input type="text" class="editable" th:value="${user.getFullName()}"
                                            id="fullName" name="fullName"/></td>
                             </tr>
                             <tr>
                                 <td><strong>Email:</strong></td>
-                                <td><input type="email" class="editable" th:value="${session.user.getEmailAddress()}"
+                                <td><input type="email" class="editable" th:value="${user.getEmailAddress()}"
                                            id="emailAddress" name="emailAddress"/></td>
                             </tr>
                             <tr>
                                 <td><strong>Phone:</strong></td>
-                                <td><input type="text" class="editable" th:value="${session.user.getPhone()}" id="phone"
+                                <td><input type="text" class="editable" th:value="${user.getPhone()}" id="phone"
                                            name="phone"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td><strong>Date of Birth:</strong></td>
-                                <td><input type="date" class="editable" th:value="${session.user.getDob()}" id="dob"
+                                <td><input type="date" class="editable" th:value="${user.getDob()}" id="dob"
                                            name="dob"/></td>
                             </tr>
                             <tr>
                                 <td><strong>Address:</strong></td>
                                 <td><input type="text" class="editable"
-                                           th:value="${session.user.getAddress().number} + ', ' + ${session.user.getAddress().street} + ', '+ ${session.user.getAddress().city} + ', '+ ${session.user.getAddress().country} + ', '+ ${session.user.getAddress().zipcode}"
+                                           th:value="${user.getAddress() == null ? '' : (user.getAddress().getNumber() + ', ' + user.getAddress().getStreet() + ', '+ user.getAddress().getCity() + ', '+ user.getAddress().getCountry() + ', '+ user.getAddress().getZipcode())}"
                                            id="address" name="address"/></td>
                             </tr>
                             </tbody>

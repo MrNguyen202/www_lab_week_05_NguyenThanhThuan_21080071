@@ -90,6 +90,7 @@ public class AuthenticateController {
             Candidate candidate = new Candidate();
             candidate.setEmail(email);
             candidate.setPassword(password);
+            candidate.setAvatar("https://res.cloudinary.com/dlf3hmpnl/image/upload/v1734196770/kjhygf6cqjhu7hev7s9a.jpg");
             candidate.setRole(Role.CANDIDATE);
             candidate.setFullName(random.ints(8, 0, CHARACTERS.length())
                     .mapToObj(CHARACTERS::charAt)
@@ -157,6 +158,10 @@ public class AuthenticateController {
                 } else {
                     Candidate candidate = (Candidate) session.getAttribute("user");
                     Page<JobIndexDTO> jobIndexDTOPage = jobService.getJobsForCandidate(candidate.getId(), 0, 20);
+
+                    if(candidate != null && jobIndexDTOPage.isEmpty()) {
+                        jobIndexDTOPage = jobService.getJobsByExpiredDate(0, 20);
+                    }
                     // Calculate start and end page numbers
                     int pageStart = (0 / 20) * 20;
                     int pageEnd = Math.min(pageStart + 19, jobIndexDTOPage.getTotalPages() - 1);

@@ -98,4 +98,14 @@ public class JobService implements IServices<Job, Long> {
             return new JobCompanyDTO(job, jobSkills);
         });
     }
+
+    public Page<JobIndexDTO> getJobsByExpiredDate(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+        Page<Job> jobs = jobRepository.findAllByExpiredDate(pageable);
+
+        return jobs.map(job -> {
+            List<String> skills = jobSkillRepository.findSkillsByJobId(job.getId());
+            return new JobIndexDTO(job, skills);
+        });
+    }
 }

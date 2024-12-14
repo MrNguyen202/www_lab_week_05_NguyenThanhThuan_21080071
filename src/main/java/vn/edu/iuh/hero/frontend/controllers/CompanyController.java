@@ -4,7 +4,7 @@
  *
  */
 
-package vn.edu.iuh.hero.frontend.controllers.companyControllers;
+package vn.edu.iuh.hero.frontend.controllers;
 /*
  * @Description:
  * @Author: Nguyen Thanh Thuan
@@ -13,18 +13,14 @@ package vn.edu.iuh.hero.frontend.controllers.companyControllers;
  *
  */
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
+import com.neovisionaries.i18n.CountryCode;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,18 +32,12 @@ import vn.edu.iuh.hero.backend.enums.SkillType;
 import vn.edu.iuh.hero.backend.models.Candidate;
 import vn.edu.iuh.hero.backend.models.Company;
 import vn.edu.iuh.hero.backend.models.Job;
-import vn.edu.iuh.hero.backend.services.impls.CandidateService;
-import vn.edu.iuh.hero.backend.services.impls.JobService;
-import vn.edu.iuh.hero.backend.services.impls.SkillService;
+import vn.edu.iuh.hero.backend.services.impls.*;
 
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -65,11 +55,22 @@ public class CompanyController {
     private JobService jobService;
 
     @Autowired
-    private JavaMailSender mailSender;
+    private AddressService addressService;
+
+    @Autowired
+    private CompanyService companyService;
 
     @GetMapping("/viewProfile")
     public String viewProfile() {
         return "companies/company-profile";
+    }
+
+    @GetMapping("/viewSearchCV")
+    public ModelAndView viewSearchCV(){
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("companies/search-company");
+        return modelAndView;
     }
 
     @GetMapping("/viewMyJob")
@@ -161,101 +162,6 @@ public class CompanyController {
         return modelAndView;
     }
 
-    @PostMapping("/sendMail")
-    public ModelAndView sendMailToCandidate(
-            @RequestParam("emailTextarea") String emails,
-            HttpSession session
-    ) {
-        ModelAndView modelAndView = new ModelAndView();
-
-        // Inject JavaMailSender
-        JavaMailSender mailSender;
-
-        // Get company and job information from session/service
-        Company company = (Company) session.getAttribute("user");
-        Long jobId = (Long) session.getAttribute("jobId");
-        System.out.println("Job ID: " + jobId);
-        Job job = jobService.findById(jobId).orElse(null);
-
-        if (job == null || company == null) {
-            System.out.println("Job or company not found.");
-            modelAndView.addObject("error", "Không tìm thấy công việc hoặc thông tin công ty.");
-            modelAndView.setViewName("companies/candidate-for-job");
-            return modelAndView;
-        }
-
-        // Split email string and validate
-        String[] emailList = emails.split(",");
-        for (String email : emailList) {
-            if (!isValidEmail(email.trim())) {
-                modelAndView.addObject("error", "Email không hợp lệ: " + email);
-                modelAndView.setViewName("companies/candidate-for-job");
-                return modelAndView;
-            }
-        }
-
-        // Email content
-        String subject = "Thông tin cơ hội việc làm tại " + company.getCompName();
-        String bodyTemplate = """
-        <p>Xin chào,</p>
-        <p>Công ty <strong>%s</strong> xin gửi thông tin về cơ hội việc làm:</p>
-        <p><strong>Tên công việc:</strong> %s</p>
-        <p><strong>Mô tả công việc:</strong> %s</p>
-        <p><strong>Địa chỉ làm việc:</strong> %s</p>
-        <p><strong>Ngày hết hạn ứng tuyển:</strong> %s</p>
-        <p>Chúng tôi mong chờ hồ sơ ứng tuyển từ bạn!</p>
-        <p>Để biết thêm thông tin, vui lòng phản hồi về địa chỉ mail <e><u>%s</u></e> cho chúng tôi!</p>
-        <p>Trân trọng,</p>
-        <p><em>%s</em></p>
-        """;
-
-        String address = company.getAddress().getNumber() + " " + company.getAddress().getStreet() + ", " + company.getAddress().getCity() + ", " + company.getAddress().getCountry();
-        String body = String.format(
-                bodyTemplate,
-                company.getCompName(),
-                job.getJobName(),
-                job.getJobDesc(),
-                address,
-                job.getExpiredDate().toString(),
-                company.getEmailAddress(),
-                company.getCompName()
-        );
-
-        try {
-            // Send email to each address
-            for (String email : emailList) {
-                sendEmail(email.trim(), subject, body);
-            }
-            System.out.println("Mail sent successfully!");
-            modelAndView.addObject("message", "Mail sent successfully!");
-        } catch (Exception e) {
-            System.out.println("Error sending email: " + e.getMessage());
-            modelAndView.addObject("error", "Lỗi khi gửi email: " + e.getMessage());
-        }
-
-        modelAndView.setViewName("redirect:/company/viewMyJob");
-        return modelAndView;
-    }
-
-    private void sendEmail(String recipientEmail, String subject, String body) throws MessagingException {
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        try {
-            helper.setTo(recipientEmail);
-            helper.setSubject(subject);
-            helper.setText(body, true); // true for HTML content
-            mailSender.send(message);
-        } catch (MessagingException e) {
-            throw new RuntimeException("Error sending email", e);
-        }
-    }
-
-    private boolean isValidEmail(String email) {
-        // Basic email validation
-        return email != null && email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-    }
-
-
     @GetMapping("/viewCV/{candidateId}")
     public ResponseEntity<UrlResource> viewCV(@PathVariable Long candidateId) throws IOException {
         Optional<Candidate> candidate = candidateService.findById(candidateId);
@@ -282,5 +188,30 @@ public class CompanyController {
                 .contentType(MediaType.APPLICATION_PDF)  // Đặt loại nội dung là PDF
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=cv.pdf")  // Đặt tên cho file
                 .body(resource);
+    }
+
+    @PostMapping("/updateProfile")
+    public ModelAndView updateProfile(
+            @RequestParam("name") String compName,
+            @RequestParam("emailAddress") String email,
+            @RequestParam("phone") String phone,
+            @RequestParam("url") String url,
+            @RequestParam("address") String address,
+            HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView();
+        Company company = (Company) session.getAttribute("user");
+        company.setCompName(compName);
+        company.setEmailAddress(email);
+        company.setPhone(phone);
+        company.getAddress().setStreet(address.split(", ")[1]);
+        company.getAddress().setCity(address.split(", ")[2]);
+        company.getAddress().setCountry(CountryCode.valueOf(address.split(", ")[3]));
+        company.getAddress().setNumber(address.split(", ")[0]);
+        company.getAddress().setZipcode(address.split(", ")[4]);
+        addressService.update(company.getAddress());
+        companyService.update(company);
+        modelAndView.addObject("user", company);
+        modelAndView.setViewName("companies/company-profile");
+        return modelAndView;
     }
 }

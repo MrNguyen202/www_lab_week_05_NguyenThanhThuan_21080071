@@ -37,6 +37,16 @@
             padding: 10px 0;
             flex-shrink: 0; /* Không cho footer co lại */
         }
+
+        .hero-section .container {
+            text-align: center;
+        }
+
+        .hero-section form {
+            margin: 0 auto; /* Canh giữa form */
+            width: 50%; /* Chiều rộng của form tìm kiếm */
+        }
+
         /* Tùy chỉnh màu sắc */
         .navbar {
             background-color: #007bff; /* Xanh đậm */
@@ -67,6 +77,7 @@
         .navbar-nav .nav-item {
             margin-right: 50px; /* Tùy chỉnh khoảng cách */
         }
+
         .editable {
             padding: 5px;
             border: 1px solid #ced4da;
@@ -98,18 +109,21 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item me-3">
-                        <a class="nav-link active" aria-current="page" href="/candidate/viewHomeCandidate">Home Page</a>
+                        <a class="nav-link active" aria-current="page" href="/company/viewHomeCompany">Home Page</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="/candidate/viewSearch">Search Job</a>
+                        <a class="nav-link" href="/company/viewSearchCV">Search CV</a>
                     </li>
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="/candidate/viewCV">CV</a>
+                        <a class="nav-link" href="/company/viewMyJob">My Job</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="/company/viewPostJob">Post Job</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/candidate/viewProfile">
+                        <a class="nav-link" href="/company/viewProfile">
                             <i class="fas fa-user"></i> <!-- Biểu tượng người dùng -->
-                            <span th:text="${session.user.getFullName()}"></span>
+                            <span th:text="${session.user.getCompName()}"></span>
                         </a>
                     </li>
                 </ul>
@@ -120,64 +134,34 @@
 
 <main>
     <!-- Hero Section -->
-    <section class="hero-section mt-3">
+    <section class="hero-section center">
         <div class="container">
             <h1>Chào mừng đến với Tuyển dụng việc làm!</h1>
             <p>Kết nối nhà tuyển dụng và ứng viên dễ dàng hơn bao giờ hết.</p>
         </div>
 
-        <h2 style="text-align: start" class="mb-3">Danh sách công việc phù hợp dành cho bạn</h2>
+        <div>
+            <form action="#" method="get">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Nhập từ khóa" name="keyword">
+                    <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+
+        <h2 style="text-align: start" class="mb-3">Danh sách ứng viên bạn có thể tuyển dụng</h2>
         <table class="table" style="table-layout: fixed;">
             <thead class="table-dark">
             <tr>
-                <th style="width: 20%;">Name job</th>
-                <th style="width: 30%;">Description</th>
-                <th style="width: 25%;">Company</th>
-                <th style="width: 15%;">Skill</th>
+                <th style="width: 20%;">Name</th>
+                <th style="width: 15%;">Level</th>
+                <th style="width: 30%;">Companies that have done</th>
+                <th style="width: 25%;">Skill</th>
                 <th style="width: 10%;"></th>
             </tr>
             </thead>
-            <tbody>
-            <!-- Loop through each job in the map -->
-            <tr th:each="entry : ${jobs}">
-                <td class="editable" style="width: 20%;" th:text="${entry.getJobName()}"></td>
-                <td class="editable" style="width: 30%;" th:text="${entry.getJobDesc()}"></td>
-                <td class="editable" style="width: 25%;" th:text="${entry.getCompanyName()}"></td>
-                <td class="editable" style="width: 15%;">
-                    <!-- Loop through each skill in the skills list -->
-                    <span th:each="skill : ${entry.skills}" th:text="${skill} + ', '"></span>
-                </td>
-                <td class="editable" style="width: 10%; text-align: center">
-                    <a class="btn btn-primary" th:href="@{'/login'}">Apply Now</a>
-                </td>
-            </tr>
-            </tbody>
+            <!--Loop through each candidate in the map-->
         </table>
-        <!-- Pagination -->
-        <div style="display: flex; align-items: center; justify-content: center" th:if="${totalElements > pageSize}">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <!-- Previous button -->
-                    <li th:class="${currentPage > 0} ? 'page-item' : 'page-item disabled d-none'">
-                        <a class="page-link" th:href="@{'/candidate/viewHomeCandidate?page=' + ${currentPage - 1} + '&size=' + ${pageSize}}"
-                           th:text="'Previous'"></a>
-                    </li>
-
-                    <!-- Loop through page numbers (e.g., 1, 2, 3, ..., 20) -->
-                    <li th:each="i : ${#numbers.sequence(pageStart, pageEnd)}"
-                        th:class="${currentPage == i} ? 'page-item active' : 'page-item'">
-                        <a class="page-link" th:href="@{'/candidate/viewHomeCandidate?page=' + ${i} + '&size=' + ${pageSize}}"
-                           th:text="${i + 1}"></a>
-                    </li>
-
-                    <!-- Next button -->
-                    <li th:class="${currentPage < totalPages - 1} ? 'page-item' : 'page-item disabled d-none'">
-                        <a class="page-link" th:href="@{'/candidate/viewHomeCandidate?page=' + ${currentPage + 1} + '&size=' + ${pageSize}}"
-                           th:text="'Next'"></a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
     </section>
 </main>
 
