@@ -8,7 +8,6 @@
 - **Lớp**: DHKTPM17B
 # Giảng viên hướng dẫn
 - **Họ Và Tên**: Võ Văn Hải
-- **Email**: vovanhai@ueh.edu.vn
 
 ----
 
