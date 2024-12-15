@@ -113,7 +113,7 @@
             <p>Chúng tôi cung cấp hàng ngàn công việc từ các công ty uy tín trên toàn quốc</p>
         </div>
         <div>
-            <form action="/search" method="get">
+            <form action="#" method="get">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Nhập từ khóa" name="keyword">
                     <button class="btn btn-primary" type="submit">Tìm kiếm</button>
@@ -143,7 +143,7 @@
                     <span th:each="skill : ${entry.skills}" th:text="${skill} + ', '"></span>
                 </td>
                 <td style="text-align: end">
-                    <a class="btn btn-primary" th:href="@{'/login'}">Apply Now</a>
+                    <a class="btn btn-primary" href="#">Apply Now</a>
                 </td>
             </tr>
             </tbody>
@@ -154,20 +154,20 @@
                 <ul class="pagination">
                     <!-- Previous button -->
                     <li th:class="${currentPage > 0} ? 'page-item' : 'page-item disabled'">
-                        <a class="page-link" th:href="@{'/home?page=' + ${currentPage - 1} + '&size=' + ${pageSize}}"
+                        <a class="page-link" th:href="@{'/search?page=' + ${currentPage - 1} + '&size=' + ${pageSize}}"
                            th:text="'Previous'"></a>
                     </li>
 
                     <!-- Loop through the page numbers to show a maximum of 3 pages (example: 1, 2, 3) -->
                     <li th:each="i : ${#numbers.sequence(0, 2)}"
                         th:class="${currentPage == i} ? 'page-item active' : 'page-item'">
-                        <a class="page-link" th:href="@{'/home?page=' + ${i} + '&size=' + ${pageSize}}"
+                        <a class="page-link" th:href="@{'/search?page=' + ${i} + '&size=' + ${pageSize}}"
                            th:text="${i + 1}"></a>
                     </li>
 
                     <!-- Next button -->
                     <li th:class="${currentPage < totalPages - 1} ? 'page-item' : 'page-item disabled'">
-                        <a class="page-link" th:href="@{'/home?page=' + ${currentPage + 1} + '&size=' + ${pageSize}}"
+                        <a class="page-link" th:href="@{'/search?page=' + ${currentPage + 1} + '&size=' + ${pageSize}}"
                            th:text="'Next'"></a>
                     </li>
                 </ul>

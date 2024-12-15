@@ -153,7 +153,7 @@
                     <span th:each="skill : ${entry.skills}" th:text="${skill} + ', '"></span>
                 </td>
                 <td class="editable" style="width: 10%;">
-                    <a class="btn btn-primary" th:href="@{'/company/viewCV/'+${entry.getId()}}">View</a>
+                    <a class="btn btn-primary" th:href="@{'/cv/show/'+${entry.getId()}}">View</a>
                 </td>
             </tr>
             </tbody>

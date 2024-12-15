@@ -26,5 +26,4 @@ public interface JobRepository extends JpaRepository<Job, Long> {
     @Query("SELECT j FROM Job j WHERE j.expiredDate >= CURRENT_DATE ORDER BY FUNCTION('DATEDIFF', j.expiredDate, CURRENT_DATE) DESC")
     Page<Job> findAllByExpiredDate(Pageable pageable);
 
-
 }

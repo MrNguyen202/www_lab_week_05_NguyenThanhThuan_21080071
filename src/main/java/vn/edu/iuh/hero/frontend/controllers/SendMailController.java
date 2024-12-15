@@ -99,11 +99,13 @@ public class SendMailController {
         );
 
         try {
+            int i = 0;
             // Send email to each address
             for (String email : emailList) {
                 sendEmail(email.trim(), subject, body);
+                i++;
+                System.out.println(i);
             }
-            System.out.println("Mail sent successfully!");
             modelAndView.addObject("message", "Mail sent successfully!");
         } catch (Exception e) {
             System.out.println("Error sending email: " + e.getMessage());

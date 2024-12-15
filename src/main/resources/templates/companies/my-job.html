@@ -165,13 +165,13 @@
                 </td>
                 <td class="editable" style="width: 10%;" th:text="${entry.getJob().getExpiredDate()}"></td>
                 <td class="editable" style="width: 5%; text-align: center">
-                    <a class="btn btn-primary" th:href="@{'/viewJob'}">View</a>
+                    <a class="btn btn-primary" href="#">View</a>
                 </td>
                 <td class="editable" style="width: 10%; text-align: center">
                     <a class="btn btn-warning" th:href="@{'/company/findCandidates/' + ${entry.getJob().getId()}}">Tìm ứng viên</a>
                 </td>
                 <td class="editable" style="width: 5%; text-align: center">
-                    <a class="btn btn-danger" th:href="@{'/delete'}">Delete</a>
+                    <a class="btn btn-danger" th:href="@{'/job/delete/' + ${entry.getJob().getId()}}">Delete</a>
                 </td>
             </tr>
             </tbody>

@@ -16,10 +16,7 @@ package vn.edu.iuh.hero.frontend.controllers;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.iuh.hero.backend.dtos.JobInsertDTO;
 import vn.edu.iuh.hero.backend.enums.SkillLevel;
@@ -85,6 +82,20 @@ public class JobController {
         modelAndView.addObject("typeSkill", Arrays.asList(SkillType.values()));
         modelAndView.addObject("skillLevels", Arrays.asList(SkillLevel.values()));
         modelAndView.setViewName("/companies/post-job");
+        return modelAndView;
+    }
+
+    //delete job
+    @GetMapping("/delete/{jobId}")
+    public ModelAndView deleteJob(@PathVariable Long jobId) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<JobSkill> jobSkills = jobSkillService.findAllByJob_Id(jobId);
+        for (JobSkill jobSkill : jobSkills) {
+            jobSkillService.delete(jobSkill.getId());
+        }
+        jobService.delete(jobId);
+        modelAndView.addObject("message", "Job deleted successfully!");
+        modelAndView.setViewName("redirect:/company/viewMyJob");
         return modelAndView;
     }
 }

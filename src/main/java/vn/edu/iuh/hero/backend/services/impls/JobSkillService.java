@@ -60,4 +60,8 @@ public class JobSkillService implements IServices<JobSkill, JobSkillId> {
     public List<String> findByJobId(Long jobId) {
         return jobSkillRepository.findSkillsByJobId(jobId);
     }
+
+    public List<JobSkill> findAllByJob_Id(Long jobId) {
+        return jobSkillRepository.findAllByJob_Id(jobId);
+    }
 }
