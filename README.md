@@ -57,7 +57,7 @@ Website tuyển dụng là một hệ thống giúp kết nối nhà tuyển d�
 - Chạy ừng dụng bằng class **"NguyenThanhThuan21080071Lab5Application"** để tạo database
 - Class diagram của project:
 ![img.png](img.png)
-- Cơ sở dữ liệu:
+- Cơ sở dữ liệu đã cập nhật thêm:
 ![img_1.png](img_1.png)
 3. **Tạo dữ liệu:**
 - Chạy file script "data.sql" có trong project hoặc đoạn script đính kèm sau:
