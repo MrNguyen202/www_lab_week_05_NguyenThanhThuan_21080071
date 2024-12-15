@@ -20,5 +20,5 @@ Website tuyển dụng là một hệ thống hỗ trợ người tìm việc v�
 ## Cài đặt
 ### 1. Clone repository
 ```bash
-- git clone https://github.com/MrNguyen202/www_lab_week_05_NguyenThanhThuan_21080071.git
-- cd repository-name
+  - git clone https://github.com/MrNguyen202/www_lab_week_05_NguyenThanhThuan_21080071.git
+  - cd repository-name1
