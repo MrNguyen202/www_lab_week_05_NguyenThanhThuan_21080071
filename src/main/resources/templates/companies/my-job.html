@@ -163,7 +163,7 @@
                     <!-- Loop through each skill in the skills list -->
                     <span th:each="skill : ${entry.getJobSkills()}" th:text="${skill.getSkill().getSkillName()} + ', '"></span>
                 </td>
-                <td class="editable" style="width: 10%;" th:text="${entry.getJob().getExpiredDate()}"></td>
+                <td class="editable" style="width: 10%;" th:text="${ entry.getJob().getExpiredDate()}"></td>
                 <td class="editable" style="width: 5%; text-align: center">
                     <a class="btn btn-primary" href="#">View</a>
                 </td>
