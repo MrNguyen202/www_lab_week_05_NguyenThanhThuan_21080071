@@ -52,8 +52,13 @@ Website tuyển dụng là một hệ thống giúp kết nối nhà tuyển d�
    ```bash
    - git clone https://github.com/MrNguyen202/www_lab_week_05_NguyenThanhThuan_21080071.git
    ```
-2. **Mở ứng dụng:** Sử dụng IntellIj IDEA để mở project code vừa clone.
+2. **Mở ứng dụng:** 
+- Sử dụng IntellIj IDEA để mở project code vừa clone.
 - Chạy ừng dụng bằng class **"NguyenThanhThuan21080071Lab5Application"** để tạo database
+- Class diagram của project:
+![img.png](img.png)
+- Cơ sở dữ liệu:
+![img_1.png](img_1.png)
 3. **Tạo dữ liệu:**
 - Chạy file script "data.sql" có trong project hoặc đoạn script đính kèm sau:
 [Uploading data.sql…]()
