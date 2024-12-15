@@ -57,33 +57,58 @@ Website tuyển dụng là một hệ thống giúp kết nối nhà tuyển d�
 3. **Tạo dữ liệu:**
 - Chạy file script "data.sql" có trong project hoặc đoạn script đính kèm sau:
 [Uploading data.sql…]()
-## 6. Demo
+## 6. Demo và hướng dẫn sử dụng
 1. **Đăng nhập**
-   - Với quyền account là **ứng viên**:
-     + **Email**: caterina.mcclure@hotmail.com
-     + **Password**: 16y27p983hp96r<br>
-     
-     ![image](https://github.com/user-attachments/assets/db032d4f-d94b-4474-b0c1-ce512e1b5ab2)
-     ![image](https://github.com/user-attachments/assets/7adc134c-3b17-44e7-b92a-9c30b24387df)
-   - Với quyền account là **nhà tuyển dụng**:
-     + **Email**: mitchell.pagac@hotmail.com
-     + **Password**: 155zvczy <br>
-     ![image](https://github.com/user-attachments/assets/e4379a51-6915-45e6-848b-76363bcd03f3)
-     ![image](https://github.com/user-attachments/assets/a091beac-d1cc-4408-a431-b626476c26dd)
-2. **Chức năng quản lý thông tin người dùng**
-    ![image](https://github.com/user-attachments/assets/a1e3fe74-5f70-476f-abbe-17e26ce77f08)
+- Với quyền account là **ứng viên**:
+  + **Email**: caterina.mcclure@hotmail.com
+  + **Password**: 16y27p983hp96r <br>
+  ![image](https://github.com/user-attachments/assets/db032d4f-d94b-4474-b0c1-ce512e1b5ab2) <br> <br>
+  + Sau khi đăng nhập, ứng viên sẽ được gợi ý các công việc phù hợp với kỹ năng của mình. <br>
+  ![image](https://github.com/user-attachments/assets/7adc134c-3b17-44e7-b92a-9c30b24387df)
+- Với quyền account là **nhà tuyển dụng**:
+  + **Email**: mitchell.pagac@hotmail.com
+  + **Password**: 155zvczy <br>
+  ![image](https://github.com/user-attachments/assets/e4379a51-6915-45e6-848b-76363bcd03f3) <br> <br>
+  + Sau khi đăng nhập, nhà tuyển dụng sẽ được gợi ý các ứng viên tiềm năng theo Level. <br>
+  ![image](https://github.com/user-attachments/assets/a091beac-d1cc-4408-a431-b626476c26dd) <br> <br>
+2. **Chức năng quản lý thông tin người dùng** <br>
+- Có thể cập nhật thông tin cá nhân sau đó nhấn nút "Save Changes" để lưu thông tin. <br> 
+![image](https://github.com/user-attachments/assets/a1e3fe74-5f70-476f-abbe-17e26ce77f08)
 3. **Chức năng đăng tin tuyển dụng**
-   ![image](https://github.com/user-attachments/assets/510d1cb4-b1ee-45c3-8043-7fa6f4d17202)
+- Người dùng có thể đăng tin tuyển dụng bằng cách điền thông tin vào form sau đó nhấn nút "Đăng tin". <br>
+![image](https://github.com/user-attachments/assets/510d1cb4-b1ee-45c3-8043-7fa6f4d17202)
 4. **Chức năng thêm kỹ năng**
-   ![image](https://github.com/user-attachments/assets/5633746b-bbbd-40ef-9a3d-c155a4fc7488)
+- Người dùng có thể thêm kỹ năng mới để đưa vào phần những kỹ năng của tin công việc. <br>
+![image](https://github.com/user-attachments/assets/5633746b-bbbd-40ef-9a3d-c155a4fc7488)
 5. **Chức năng quản lý tin tuyển dụng**
-   ![image](https://github.com/user-attachments/assets/d0417b89-663f-4516-af1f-c9cbfd0ae813)
+- Nhà tuyển dụng có thể xem danh sách các tin tuyển dụng đã đăng và xóa tin tuyển dụng. <br>
+![image](https://github.com/user-attachments/assets/d0417b89-663f-4516-af1f-c9cbfd0ae813)
 6. **Chức năng tìm kiếm ứng viên phù hợp với skill của công việc**
-   ![image](https://github.com/user-attachments/assets/7529e68a-c223-4f42-b046-3aa63609d260)
+- Người dùng có thể tìm kiếm ứng viên phù hợp với skill của công việc bằng cách nhấn nút "Tìm ứng viên" tại công việc mình muốn từ màn hình phía trên <br>
+![image](https://github.com/user-attachments/assets/7529e68a-c223-4f42-b046-3aa63609d260)
 7. **Chức năng gửi mail cho ứng viên đã chọn(có thể gửi đồng loạt)**
-   ![image](https://github.com/user-attachments/assets/bedab042-ab78-48f5-9228-cec065497216)
-   ![image](https://github.com/user-attachments/assets/61410093-8830-4586-8002-f24616eaf9b7)
+- Sau khi tiến hành tìm kiếm ứng viên, danh sách ứng viên sẽ hiển thị. Nhà tuyển dụng có thể gửi mail cho họ bằng cách nhấn vào biểu tượng email hoặc có thể gửi đồng loại bằng cách nhấn vào "mail" để gửi đồng loạt bằng họp thử Send Mail<br>
+![image](https://github.com/user-attachments/assets/bedab042-ab78-48f5-9228-cec065497216)
+- Và đây là mail được gửi đến 
+![image](https://github.com/user-attachments/assets/61410093-8830-4586-8002-f24616eaf9b7)
 9. **Chức năng xem CV ứng viên**
+- Nhà tuyển dụng có thể xem CV của ứng viên bằng cách nhấn vào nút "View" ở bất cứ trang cần xem thông tin ứng viên. <br>
+- Và được kết quả như sau:
    ![image](https://github.com/user-attachments/assets/e87b6027-e334-4ffd-9970-a7fbb95abc55)
 
+## 7. Kết luận
+Trên đây là hướng dẫn cài đặt và sử dụng ứng dụng website tuyển dụng. Ứng dụng giúp kết nối nhà tuyển dụng và ứng viên một cách dễ dàng và nhanh chóng. Hy vọng rằng thông qua bài lab này, bạn sẽ có thêm kiến thức và kỹ năng trong việc xây dựng ứng dụng web sử dụng Spring Boot. Cảm ơn bạn đã theo dõi bài lab này!
 
+# Tài liệu tham khảo
+- Slide bài giảng của giảng viên
+- Spring Boot - https://docs.spring.io/
+- Youtube - https://www.youtube.com/
+- Google - https://www.google.com/
+- ChatGPT - https://chat.openai.com/
+# Đóng góp
+- Mọi đóng góp, góp ý của bạn đều giúp tôi hoàn thiện hơn. Hãy để lại bình luận hoặc liên hệ với tôi qua email: nguyenthuan020010@gmail.com
+- Hoặc tạo issues hoặc pull requests tại:
+    + Repository: [lab_week_05_NguyenThanhThuan_21080071](https://github.com/ngocmai1522k2/www_lab_week5.git)
+    + Issues: [Issues](https://github.com/MrNguyen202/www_lab_week_05_NguyenThanhThuan_21080071/issues/new)
+    + Pull requests: [Pull requests](https://github.com/MrNguyen202/www_lab_week_05_NguyenThanhThuan_21080071/compare)
+- Rất mong nhận được sự đóng góp tích cực từ bạn đọc. Xin cảm ơn!
