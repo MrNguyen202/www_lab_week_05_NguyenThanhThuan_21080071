@@ -96,7 +96,16 @@ Website tuyển dụng là một hệ thống giúp kết nối nhà tuyển d�
 - Và được kết quả như sau:
    ![image](https://github.com/user-attachments/assets/e87b6027-e334-4ffd-9970-a7fbb95abc55)
 
-## 7. Kết luận
+## 7. Phát triển thêm sau lab
+- Chức năng tìm kiếm công việc
+- Chức năng gợi ý kỹ năng cần học
+- Chức năng tạo hồ sơ ứng viên(upload CV)
+- Nâng cao bảo mật bằng Spring Sercurity
+- Chức năng chat trực tuyến giữa nhà tuyển dụng và ứng viên
+- Dự báo xu hướng phát triển công việc, các skill, ..v.v
+- AI support
+
+## 8. Kết luận
 Trên đây là hướng dẫn cài đặt và sử dụng ứng dụng website tuyển dụng. Ứng dụng giúp kết nối nhà tuyển dụng và ứng viên một cách dễ dàng và nhanh chóng. Hy vọng rằng thông qua bài lab này, bạn sẽ có thêm kiến thức và kỹ năng trong việc xây dựng ứng dụng web sử dụng Spring Boot. Cảm ơn bạn đã theo dõi bài lab này!
 
 # Tài liệu tham khảo
