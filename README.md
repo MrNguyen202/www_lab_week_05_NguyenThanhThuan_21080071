@@ -54,8 +54,36 @@ Website tuyển dụng là một hệ thống giúp kết nối nhà tuyển d�
    ```
 2. **Mở ứng dụng:** Sử dụng IntellIj IDEA để mở project code vừa clone.
 - Chạy ừng dụng bằng class **"NguyenThanhThuan21080071Lab5Application"** để tạo database
-3. **Kết nối database:**
+3. **Tạo dữ liệu:**
 - Chạy file script "data.sql" có trong project hoặc đoạn script đính kèm sau:
-
+[Uploading data.sql…]()
+## 6. Demo
+1. **Đăng nhập**
+   - Với quyền account là **ứng viên**:
+     + **Email**: caterina.mcclure@hotmail.com
+     + **Password**: 16y27p983hp96r<br>
+     
+     ![image](https://github.com/user-attachments/assets/db032d4f-d94b-4474-b0c1-ce512e1b5ab2)
+     ![image](https://github.com/user-attachments/assets/7adc134c-3b17-44e7-b92a-9c30b24387df)
+   - Với quyền account là **nhà tuyển dụng**:
+     + **Email**: mitchell.pagac@hotmail.com
+     + **Password**: 155zvczy <br>
+     ![image](https://github.com/user-attachments/assets/e4379a51-6915-45e6-848b-76363bcd03f3)
+     ![image](https://github.com/user-attachments/assets/a091beac-d1cc-4408-a431-b626476c26dd)
+2. **Chức năng quản lý thông tin người dùng**
+    ![image](https://github.com/user-attachments/assets/a1e3fe74-5f70-476f-abbe-17e26ce77f08)
+3. **Chức năng đăng tin tuyển dụng**
+   ![image](https://github.com/user-attachments/assets/510d1cb4-b1ee-45c3-8043-7fa6f4d17202)
+4. **Chức năng thêm kỹ năng**
+   ![image](https://github.com/user-attachments/assets/5633746b-bbbd-40ef-9a3d-c155a4fc7488)
+5. **Chức năng quản lý tin tuyển dụng**
+   ![image](https://github.com/user-attachments/assets/d0417b89-663f-4516-af1f-c9cbfd0ae813)
+6. **Chức năng tìm kiếm ứng viên phù hợp với skill của công việc**
+   ![image](https://github.com/user-attachments/assets/7529e68a-c223-4f42-b046-3aa63609d260)
+7. **Chức năng gửi mail cho ứng viên đã chọn(có thể gửi đồng loạt)**
+   ![image](https://github.com/user-attachments/assets/bedab042-ab78-48f5-9228-cec065497216)
+   ![image](https://github.com/user-attachments/assets/61410093-8830-4586-8002-f24616eaf9b7)
+9. **Chức năng xem CV ứng viên**
+   ![image](https://github.com/user-attachments/assets/e87b6027-e334-4ffd-9970-a7fbb95abc55)
 
 
