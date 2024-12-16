@@ -121,8 +121,7 @@ Trên đây là hướng dẫn cài đặt và sử dụng ứng dụng website 
 - ChatGPT - https://chat.openai.com/
 # Đóng góp
 - Mọi đóng góp, góp ý của bạn đều giúp tôi hoàn thiện hơn. Hãy để lại bình luận hoặc liên hệ với tôi qua email: nguyenthuan020010@gmail.com
-- Hoặc tạo issues hoặc pull requests tại:
+- Hoặc tạo issues tại:
     + Repository: [lab_week_05_NguyenThanhThuan_21080071](https://github.com/ngocmai1522k2/www_lab_week5.git)
     + Issues: [Issues](https://github.com/MrNguyen202/www_lab_week_05_NguyenThanhThuan_21080071/issues/new)
-    + Pull requests: [Pull requests](https://github.com/MrNguyen202/www_lab_week_05_NguyenThanhThuan_21080071/compare)
 - Rất mong nhận được sự đóng góp tích cực từ bạn đọc. Xin cảm ơn!
