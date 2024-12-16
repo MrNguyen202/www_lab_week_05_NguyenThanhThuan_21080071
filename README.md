@@ -50,7 +50,7 @@ Website tuyển dụng là một hệ thống giúp kết nối nhà tuyển d�
 ## 5. Cài đặt
 1. **Clone dự án từ GitHub**
    ```bash
-   - git clone https://github.com/MrNguyen202/www_lab_week_05_NguyenThanhThuan_21080071.git
+   git clone https://github.com/MrNguyen202/www_lab_week_05_NguyenThanhThuan_21080071.git
    ```
 2. **Mở ứng dụng:** 
 - Sử dụng IntellIj IDEA để mở project code vừa clone.
