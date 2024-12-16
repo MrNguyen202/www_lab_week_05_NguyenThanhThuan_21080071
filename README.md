@@ -96,7 +96,7 @@ Website tuyển dụng là một hệ thống giúp kết nối nhà tuyển d�
 ![image](https://github.com/user-attachments/assets/bedab042-ab78-48f5-9228-cec065497216)
 - Và đây là mail được gửi đến 
 ![image](https://github.com/user-attachments/assets/61410093-8830-4586-8002-f24616eaf9b7)
-9. **Chức năng xem CV ứng viên**
+8. **Chức năng xem CV ứng viên**
 - Nhà tuyển dụng có thể xem CV của ứng viên bằng cách nhấn vào nút "View" ở bất cứ trang cần xem thông tin ứng viên. <br>
 - Và được kết quả như sau:
    ![image](https://github.com/user-attachments/assets/e87b6027-e334-4ffd-9970-a7fbb95abc55)
